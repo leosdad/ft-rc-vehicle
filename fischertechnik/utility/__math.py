@@ -1,25 +1,31 @@
 import math
 
 def map(x, in_min, in_max, out_min, out_max):
+    """Map value `x` from one range to another."""
     return int((x-in_min) * (out_max-out_min) / (in_max-in_min) + out_min)
 
 def bitwise_not(n):
+    """Bitwise inverse of the passed value."""
     return (1 << n.bit_length()) - 1 - n
 
 def round_up(n, decimals):
+    """Round up the input to the nearest integer with the stated number of decimals."""
     factor = math.pow(10, decimals)
     return math.ceil(n * factor) / factor
 
 def round_down(n, decimals):
+    """Round down the input to the nearest integer with the stated number of decimals."""
     factor = math.pow(10, decimals)
     return math.floor(n * factor) / factor
 
 def is_nan(n):
+    """Check whether the value is NaN."""
     if isinstance(n, (int, float)):
         return False
     return True
 
 def is_prime(n):
+    """Check if value is prime."""
     # https://en.wikipedia.org/wiki/Primality_test#Naive_methods
     # If n is not a number but a string, try parsing it.
     if not isinstance(n, (int, float)):
