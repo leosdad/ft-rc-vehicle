@@ -3,7 +3,7 @@
 
 This project uses a fischertechnik TXT 4.0 controller to drive an RC vehicle, controlled by an ESP32-based gamepad. The gamepad communicates with the TXT controller over WiFi using UDP protocol.
 
-I'm also updating the fischertechnik library sources, hopefully replacing the auto-generated descriptions with descriptive ones that can actually be used for something. This is being done with the help of GitHub Copilot (My Pyhton expertise is more or less zero) using the GPT-5 mini and Raptor mini models which are free for non-paying customers and have unlimited use for paying users (my case).
+I'm also starting to update the fischertechnik library sources by replacing the auto-generated comments with descriptive ones that can actually help coding. This is being done with the help of GitHub Copilot (My Python expertise is near zero) using the GPT-5 mini and Raptor mini models which are free for non-paying customers and have unlimited use for paying users (my case).
 
 My sincere thank David Adams for his great book on the TXT 4.0 controller.
 
@@ -13,7 +13,7 @@ My sincere thank David Adams for his great book on the TXT 4.0 controller.
 - [TXT 4.0 and VSC server](https://forum.ftcommunity.de/viewtopic.php?f=8&t=9333&p=70026#p70026) thread at the ftcommunity forum
 - [Robot with remote control](https://forum.ftcommunity.de/viewtopic.php?f=8&t=8694&start=20) thread at the ftcommunity forum
 
-## Quick instructions
+## Instructions
 
 1. In the TXT 4.0: Enable Settings / Services / SSH
 2. In the TXT 4.0: Enable Settings / Remote access / SSH
