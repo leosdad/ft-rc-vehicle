@@ -7,6 +7,10 @@
 	"settings": {
 		"files.exclude": {
 			"backups": true
-		}
+		},
+		"python.analysis.extraPaths": [
+			"fischertechnik",
+			"lib"
+		]
 	}
 }

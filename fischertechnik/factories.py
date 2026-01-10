@@ -1,10 +1,4 @@
-"""Lightweight stub of `fischertechnik.factories` for editor assistance.
-
-This module contains small placeholders for the
-factory objects and creation functions used by the RC vehicle project.
-It is intended to satisfy import/type-checking and provide docstrings
-for IDEs — it is not a full implementation of the real hardware API.
-"""
+"""stub of `fischertechnik.factories` for editor/type-checking."""
 
 from typing import Any
 
@@ -12,6 +6,7 @@ from typing import Any
 class Controller:
     """Represents a generic controller (placeholder)."""
     def __repr__(self) -> str:  # pragma: no cover - trivial
+        """Return a string representation."""
         return "Controller()"
 
 

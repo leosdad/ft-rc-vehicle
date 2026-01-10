@@ -1,6 +1,10 @@
 
 # fischertechnik RC vehicle with ESP32 gamepad
 
+This project uses a fischertechnik TXT 4.0 controller to drive an RC vehicle, controlled by an ESP32-based gamepad. The gamepad communicates with the TXT controller over WiFi using UDP protocol.
+
+It also serves to build a stub library that references fischertechnik's proprietary libraries, allowing development and testing without being inside RoboPro Code. This library is being built with the help of GitHub Copilot (My Pyhton expertise is more or less zero) using the GPT-5 mini and Raptor mini models which are free for non-paying customers and have unlimited use for paying users (my case).
+
 ## References
 
 - TODO

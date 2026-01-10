@@ -1,4 +1,6 @@
 
+import fischertechnik.utility.math as ft_math
+
 values = None
 index = None
 value = None
@@ -23,6 +25,5 @@ def Unpack2_unsigned(values, index):
 
 def Center_0_512(value):
   global values, index
-  import fischertechnik.utility.math as ft_math
 
   return min(512, max(0, ft_math.map(value, -511, 512, 0, 512)))
