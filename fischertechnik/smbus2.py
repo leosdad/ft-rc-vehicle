@@ -6,38 +6,38 @@ class i2c_msg:
 
     @staticmethod
     def read(addr, length):
-        """Read block (returns zeros)."""
+        """Read block."""
         return bytes([0] * (length or 0))
 
     @staticmethod
     def write(addr, data):
-        """Write block (returns bytes)."""
+        """Write block."""
         return bytes(data)
 
 
 class SMBus:
-    """SMBus stub with minimal I2C methods."""
+    """SMBus with I2C methods."""
 
     def __init__(self, bus: int):
         """Initialize bus."""
         self.bus = bus
 
     def read_byte(self, addr):
-        """Read single byte (returns 0)."""
+        """Read single byte."""
         return 0
 
     def write_byte(self, addr, val):
-        """Write single byte (no-op)."""
+        """Write single byte."""
 
     def read_i2c_block_data(self, addr, register, length):
-        """Read block (returns zeros)."""
+        """Read block data."""
         return [0] * (length or 0)
 
     def write_i2c_block_data(self, addr, register, data):
-        """Write block (no-op)."""
+        """Write block data."""
 
     def close(self):
-        """Close bus (no-op)."""
+        """Close bus."""
 
 
 SMBusWrapper = SMBus

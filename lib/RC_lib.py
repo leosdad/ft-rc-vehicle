@@ -1,4 +1,5 @@
 
+# Must review these (ROBO Pro Coding just *loves* global variables...)
 values = None
 cmd = None
 data = None
@@ -24,7 +25,6 @@ def Detect_I2C_devices():
   print("Detected I2C addresses:", [hex(a) for a in i2c_scan()])
 
 
-
 def Init_RC():
   global values, cmd, data
   import smbus
@@ -37,7 +37,6 @@ def Init_RC():
 
   # Device initialization goes here
   # bus.write_byte_data(rc_module_address, ...
-
 
 
 def Read_buttons(values):
@@ -69,8 +68,6 @@ def Read_analog_buttons(values):
   	'Throttle': Unpack2_unsigned(values, 24),
   	'Misc': (values[24] + values[25]) << 8
   }
-
-
 
 
 def Read_controller_index(values):
@@ -118,7 +115,6 @@ def Read_RC():
   except OSError as e:
       print("Try resetting the ESP32 or reconnect the I2C cable.")
       print("I2C read failed:", e)
-
 
 
 def Read_axes(values):

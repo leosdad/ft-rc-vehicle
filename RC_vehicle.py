@@ -4,6 +4,7 @@ from lib.controller import *
 from lib.Math_lib import *
 from lib.RC_lib import *
 
+# Must review these (ROBO Pro Coding just *loves* global variables...)
 Speed = None
 Values_read = None
 Lights_on = None
@@ -15,20 +16,6 @@ Buttons = None
 Axes = None
 
 
-def Toggle_headlights():
-  global Speed, Values_read, Lights_on, prev_buttonLB, Reverse_on, Analog, prev_buttonRB, Buttons, Axes
-  if Buttons['LB'] and not prev_buttonLB:
-    Lights_on = not Lights_on
-    TXT_M_O7_led.set_brightness(int(512 if Lights_on else 0))
-    TXT_M_O5_led.set_brightness(int(100 if Lights_on else 0))
-  prev_buttonLB = Buttons['LB']
-
-
-def Throttle():
-  global Speed, Values_read, Lights_on, prev_buttonLB, Reverse_on, Analog, prev_buttonRB, Buttons, Axes
-  Speed = Analog['Throttle'] * 0.5
-
-
 def Init():
   global Speed, Values_read, Lights_on, prev_buttonLB, Reverse_on, Analog, prev_buttonRB, Buttons, Axes
   Speed = 0
@@ -38,9 +25,27 @@ def Init():
   Lights_on = False
 
 
-def Steer():
+def Toggle_headlights():
+  global Values_read, Lights_on, prev_buttonLB, Reverse_on, Analog, prev_buttonRB, Buttons, Axes
+  if Buttons['LB'] and not prev_buttonLB:
+    Lights_on = not Lights_on
+    TXT_M_O7_led.set_brightness(int(512 if Lights_on else 0))
+    TXT_M_O5_led.set_brightness(int(100 if Lights_on else 0))
+  prev_buttonLB = Buttons['LB']
+
+
+def Throttle():
   global Speed, Values_read, Lights_on, prev_buttonLB, Reverse_on, Analog, prev_buttonRB, Buttons, Axes
+  Speed = min(512, max(0, Analog['Throttle'] * 0.5))
+
+
+def Steer():
+  global Values_read, Lights_on, prev_buttonLB, Reverse_on, Analog, prev_buttonRB, Buttons, Axes
   TXT_M_S1_servomotor.set_position(int(Axes['X'] * 0.5))
+
+
+def ResetSteering():
+  TXT_M_S1_servomotor.set_position(256)
 
 
 def Toggle_reverse():
@@ -58,14 +63,13 @@ def Toggle_reverse():
 
 
 def Honk():
-  global Speed, Values_read, Lights_on, prev_buttonLB, Reverse_on, Analog, prev_buttonRB, Buttons, Axes
   if Buttons['B'] == True:
-    TXT_M_O6_buzzer.on()
+    TXT_M_O6_magnetic_valve.on()
   else:
-    TXT_M_O6_buzzer.off()
+    TXT_M_O6_magnetic_valve.off()
 
 
-def Read_values():
+def Read_RC_values():
   global Speed, Values_read, Lights_on, prev_buttonLB, Reverse_on, Analog, prev_buttonRB, Buttons, Axes
   Values_read = Read_RC()
   Analog = Read_analog_buttons(Values_read)
@@ -76,11 +80,12 @@ def Read_values():
 Init_RC()
 Init()
 while True:
-  if TXT_M_I1_mini_switch.is_closed():
-    Write_RC('r', [255, 50])
-  Read_values()
+  Read_RC_values()
   Throttle()
   Steer()
+  # ResetSteering()
+  # TXT_M_O7_led.set_brightness(int(512))
+  # TXT_M_O5_led.set_brightness(int(512))
   Toggle_headlights()
   Toggle_reverse()
   Honk()

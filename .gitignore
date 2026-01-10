@@ -1,2 +1,3 @@
 /backups
-/__sobras
+/__*
+*.lnk
