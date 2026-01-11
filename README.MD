@@ -19,7 +19,7 @@ My sincere thank David Adams for his great book on the TXT 4.0 controller.
 2. In the TXT 4.0: Enable Settings / Remote access / SSH
 3. In WinSCP, open the project, using the data below for remote access.
 4. Your projects folder will be at: /opt/ft/workspaces/
-5. In WinSCP, Use Ctrl+U to keep the remote folder up to date automatically. Be sure to check "Existing files only" and use text transfers in transfer settings. Maybe a script would be the best way.
+5. In WinSCP, Use Ctrl+U to keep the remote folder up to date automatically. Be sure to check "Existing files only".
 
 ### Remote server data
 
