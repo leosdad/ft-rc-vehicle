@@ -24,7 +24,7 @@ My sincere thank David Adams for his great book on the TXT 4.0 controller.
 
 ## Remote server data
 
-- File proocol: SFTP
+- File protocol: SFTP
 - Host name: 192.168.15.30 (wifi) or 192.168.7.2 (USB). (Use your actual controller IP here)
 - Port number: 22
 - User: ft
