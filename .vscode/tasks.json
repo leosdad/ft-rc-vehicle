@@ -1,0 +1,27 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "TXT4: Deploy & Run RC_vehicle",
+			"type": "shell",
+			"command": "powershell",
+			"presentation": {
+				"echo": false,
+				"clear": true
+			},
+			"args": [
+				"-NoProfile",
+				"-ExecutionPolicy",
+				"Bypass",
+				"-Command",
+				"Write-Host 'Wait...'; scp -q -C -r \"${PWD}\\RC_vehicle.py\" \"${PWD}\\lib\" ft@192.168.7.2:/opt/ft/workspaces/RC_vehicle/; ssh ft@192.168.7.2 \"python3 /opt/ft/workspaces/RC_vehicle/RC_vehicle.py\""
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
