@@ -2,11 +2,6 @@
 RC vehicle main program.
 """
 
-# pylint: disable=unused-wildcard-import
-# pylint: disable=wildcard-import
-# pylint: disable=missing-function-docstring
-# pylint: disable=global-statement
-
 import time
 from fischertechnik.controller.Motor import Motor
 from lib.controller import *

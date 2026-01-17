@@ -1,7 +1,5 @@
 """Mathematical helper functions for the RC library."""
 
-# pylint: disable=missing-function-docstring
-
 # Imports
 import struct
 import fischertechnik.utility.math as ft_math

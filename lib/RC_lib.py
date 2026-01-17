@@ -2,23 +2,20 @@
 Library for interfacing with the RC module over I2C.
 """
 
-# Must review these (ROBO Pro Coding just *loves* global variables...)
-
 from contextlib import closing
 import smbus
 from smbus2 import SMBus
 from lib.Math_lib import Unpack2_unsigned, Unpack4_signed, Center_0_512
 
+
+# Must review these (ROBO Pro Coding just *loves* global variables...)
 bus = None
 controller_index = None
 rc_module_address = None
 
-# pylint: disable=unused-wildcard-import
-# pylint: disable=wildcard-import
-# pylint: disable=missing-function-docstring
-# pylint: disable=global-statement
 
 def Detect_I2C_devices():
+  """Scan the I2C bus for connected devices."""
   # https://chatgpt.com/c/686aaa1f-3f54-8002-8c7a-afe11eec7ded
 
   def i2c_scan(bus_number=3):
@@ -36,6 +33,7 @@ def Detect_I2C_devices():
 
 
 def Init_RC():
+  """Initialize the I2C bus and RC module address."""
   global bus, rc_module_address, controller_index
   controller_index = 0
   rc_module_address = 0x28
@@ -45,6 +43,7 @@ def Init_RC():
 
 
 def Read_buttons(values):
+  """Read button states from the RC controller values."""
   # Refer to GamepadState struct in the ESP32 sketch
 
   buttons = values[2] + (values[3]) << 8
@@ -62,6 +61,7 @@ def Read_buttons(values):
 
 
 def Read_controller_index(values):
+  """Read controller index from the RC controller values."""
   # Refer to GamepadState struct in the ESP32 sketch
 
   global controller_index
@@ -70,6 +70,7 @@ def Read_controller_index(values):
 
 
 def Read_DPad(values):
+  """Read D-Pad states from the RC controller values."""
   # Refer to GamepadState struct in the ESP32 sketch
 
   return {
@@ -81,6 +82,7 @@ def Read_DPad(values):
 
 
 def Read_analog_buttons(values):
+  """Read analog button values from the RC controller values."""
   return {
     'Brake': Unpack2_unsigned(values, 20),
   	'Throttle': Unpack2_unsigned(values, 24),
@@ -89,6 +91,7 @@ def Read_analog_buttons(values):
 
 
 def Write_RC(cmd, data):
+  """Write a command and data to the RC module over I2C."""
   # https://chatgpt.com/c/6871912e-f378-8002-a959-6a6c9740ad41
 
   cmd_byte = ord(cmd) if isinstance(cmd, str) else cmd
@@ -110,6 +113,7 @@ def Write_RC(cmd, data):
 
 
 def Read_RC():
+  """Read 32 bytes of data from the RC module over I2C."""
   try:
     return bus.read_i2c_block_data(rc_module_address, 0, 32)
   except OSError as e:
@@ -119,7 +123,7 @@ def Read_RC():
 
 
 def Read_axes(values):
-  """Axes are mapped to 0-512."""
+  """Read joystick axes from the RC controller values."""
   return {
   	'X':  Center_0_512(Unpack4_signed(values, 4)),
   	'Y':  Center_0_512(Unpack4_signed(values, 8)),
