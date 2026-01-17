@@ -12,16 +12,17 @@ My sincere thank David Adams for his great book on the TXT 4.0 controller.
 - [TXT 4.0 controller book](https://forum.ftcommunity.de/viewtopic.php?t=8521) thread at the ftcommunity forum
 - [TXT 4.0 and VSC server](https://forum.ftcommunity.de/viewtopic.php?f=8&t=9333&p=70026#p70026) thread at the ftcommunity forum
 - [Robot with remote control](https://forum.ftcommunity.de/viewtopic.php?f=8&t=8694&start=20) thread at the ftcommunity forum
+- [Using VSCode to program the TXT 4.0](https://forum.ftcommunity.de/viewtopic.php?f=8&t=9588)
 
 ## Instructions
 
-1. In the TXT 4.0: Enable Settings / Services / SSH
-2. In the TXT 4.0: Enable Settings / Remote access / SSH
-3. In WinSCP, open the project, using the data below for remote access.
-4. Your projects folder will be at: /opt/ft/workspaces/
-5. In WinSCP, Use Ctrl+U to keep the remote folder up to date automatically. Be sure to check "Existing files only".
+1. In the TXT 4.0, enable Settings / Services / SSH.
+2. In the TXT 4.0, enable Settings / Remote access / SSH.
+3. To avoid entering passwords each time, generate an SSH key pair (on Windows, save it at `%USERPROFILE%\.ssh`) and copy the public key to the `/opt/ft/.ssh/authorized_keys` file in the TXT4.
+3. Create the folder `/opt/ft/workspaces/RC_vehicle` in the TXT4.
+4. Run the task at `.vscode\tasks.json` to upload the files to the TXT4.
 
-### Remote server data
+## Remote server data
 
 - File proocol: SFTP
 - Host name: 192.168.15.30 (wifi) or 192.168.7.2 (USB). (Use your actual controller IP here)
