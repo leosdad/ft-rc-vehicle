@@ -1,8 +1,18 @@
+"""
+RC vehicle main program.
+"""
+
+# pylint: disable=unused-wildcard-import
+# pylint: disable=wildcard-import
+# pylint: disable=missing-function-docstring
+# pylint: disable=global-statement
+
 import time
 from fischertechnik.controller.Motor import Motor
 from lib.controller import *
 from lib.Math_lib import *
 from lib.RC_lib import *
+
 
 # Must review these (ROBO Pro Coding just *loves* global variables...)
 Speed = None
@@ -17,7 +27,8 @@ Axes = None
 
 
 def Init():
-  global Speed, Values_read, Lights_on, prev_buttonLB, Reverse_on, Analog, prev_buttonRB, Buttons, Axes
+  """Initialize variables."""
+  global Speed, Lights_on, prev_buttonLB, Reverse_on, prev_buttonRB
   Speed = 0
   Reverse_on = False
   prev_buttonRB = False
@@ -26,56 +37,64 @@ def Init():
 
 
 def Toggle_headlights():
-  global Values_read, Lights_on, prev_buttonLB, Reverse_on, Analog, prev_buttonRB, Buttons, Axes
+  """Toggle the vehicle headlightswhen the left bumper (LB) is pressed."""
+  global Lights_on, prev_buttonLB
   if Buttons['LB'] and not prev_buttonLB:
     Lights_on = not Lights_on
-    TXT_M_O7_led.set_brightness(int(512 if Lights_on else 0))
-    TXT_M_O5_led.set_brightness(int(100 if Lights_on else 0))
+    headlights_led.set_brightness(int(512 if Lights_on else 0))
+    taillights_led.set_brightness(int(100 if Lights_on else 0))
   prev_buttonLB = Buttons['LB']
 
 
 def Throttle():
-  global Speed, Values_read, Lights_on, prev_buttonLB, Reverse_on, Analog, prev_buttonRB, Buttons, Axes
+  """Set the throttle based on the RC input."""
+  global Speed
   Speed = min(512, max(0, Analog['Throttle'] * 0.5))
 
 
 def Steer():
-  global Values_read, Lights_on, prev_buttonLB, Reverse_on, Analog, prev_buttonRB, Buttons, Axes
-  TXT_M_S1_servomotor.set_position(int(Axes['X'] * 0.5))
+  """Set the steering based on the RC input."""
+  steer_servo.set_position(int(Axes['X'] * 0.5))
 
 
 def ResetSteering():
-  TXT_M_S1_servomotor.set_position(256)
+  """Center the steering servo."""
+  steer_servo.set_position(256)
 
 
 def Toggle_reverse():
-  global Speed, Values_read, Lights_on, prev_buttonLB, Reverse_on, Analog, prev_buttonRB, Buttons, Axes
+  """Toggle the vehicle reverse mode when the right bumper (RB) is pressed."""
+  global Reverse_on, prev_buttonRB
   if Buttons['RB'] and not prev_buttonRB:
     Reverse_on = not Reverse_on
-    TXT_M_O8_led.set_brightness(int(512 if Reverse_on else 0))
+    reverse_led.set_brightness(int(512 if Reverse_on else 0))
   if Reverse_on:
-    TXT_M_M1_motor.set_speed(int(Speed), Motor.CCW)
-    TXT_M_M1_motor.start()
+    drive_motor.set_speed(int(Speed), Motor.CCW)
+    drive_motor.start()
   else:
-    TXT_M_M1_motor.set_speed(int(Speed), Motor.CW)
-    TXT_M_M1_motor.start()
+    drive_motor.set_speed(int(Speed), Motor.CW)
+    drive_motor.start()
   prev_buttonRB = Buttons['RB']
 
 
 def Honk():
-  if Buttons['B'] == True:
-    TXT_M_O6_magnetic_valve.on()
+  """Activate the horn when the B button is pressed."""
+  if Buttons['B']:
+    horn_buzzer.on()
   else:
-    TXT_M_O6_magnetic_valve.off()
+    horn_buzzer.off()
 
 
 def Read_RC_values():
-  global Speed, Values_read, Lights_on, prev_buttonLB, Reverse_on, Analog, prev_buttonRB, Buttons, Axes
+  """Read values from the RC controller and update global variables."""
+  global Values_read, Analog, Buttons, Axes
   Values_read = Read_RC()
   Analog = Read_analog_buttons(Values_read)
   Buttons = Read_buttons(Values_read)
   Axes = Read_axes(Values_read)
 
+
+# Main code
 
 Init_RC()
 Init()
@@ -83,9 +102,6 @@ while True:
   Read_RC_values()
   Throttle()
   Steer()
-  # ResetSteering()
-  # TXT_M_O7_led.set_brightness(int(512))
-  # TXT_M_O5_led.set_brightness(int(512))
   Toggle_headlights()
   Toggle_reverse()
   Honk()
