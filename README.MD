@@ -3,7 +3,9 @@
 
 This project uses a fischertechnik TXT 4.0 controller to drive an RC vehicle, controlled by an ESP32-based gamepad. The gamepad communicates with the TXT controller over WiFi using UDP protocol.
 
-I'm also starting to update the fischertechnik library sources by replacing the auto-generated comments with descriptive ones that can actually help coding. This is being done with the help of GitHub Copilot (My Python expertise is near zero) using the GPT-5 mini and Raptor mini models which are free for non-paying customers and have unlimited use for paying users (my case).
+I'm also starting to update the fischertechnik library sources by replacing the auto-generated comments with descriptive ones that can actually help coders.
+
+I use GitHub Copilot (My Python expertise is near zero) mostly with the GPT-5 Mini and Raptor Mini (free) models, plus GPT 5.2 (paid) for more difficult tasks.
 
 My sincere thank David Adams for his great book on the TXT 4.0 controller.
 
