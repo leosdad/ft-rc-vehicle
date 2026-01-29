@@ -8,13 +8,19 @@ from ..MotorFactory import MotorFactory
 class Txt4MotorFactory(MotorFactory):
 
     def create_motor(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.Motor"""
+        """Create a Txt4 motor.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Txt4Motor
+        """
         return Txt4Motor(controller, identifier)
 
     def create_encodermotor(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.Encodermotor"""
+        """Create a Txt4 encoder motor.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Txt4Encodermotor
+        """
         return Txt4Encodermotor(controller, identifier)

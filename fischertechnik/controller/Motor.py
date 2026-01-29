@@ -13,8 +13,11 @@ class Motor(IOUnit):
     MAX_SPEED = 512
 
     def __init__(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.BaseController
-        @ParamType identifier int"""
+        """Motor base class.
+
+        @param controller: BaseController
+        @param identifier: int motor index
+        """
         IOUnit.__init__(self, controller, identifier)
         self._controller.set_motor(self._identifier, self)
 
@@ -22,34 +25,37 @@ class Motor(IOUnit):
         self.stop()
 
     def set_speed(self, speed, direction):
-        """Sets the Speed at which the engine should run.
-        @ParamType speed int
-        @ParamType direction int
-        The speed range is between 0 (stop the motor) and 512
-        (maximum speed)
-        @ReturnType void"""
+        """Set motor speed.
+
+        @param speed: int (0-512)
+        @param direction: int (Motor.CW or Motor.CCW)
+        """
         pass
 
     def get_speed(self):
-        """Speed at which the engine is running. The speed range is between 0 (stop the motor) and 512 (maximum speed)
-        @ReturnType int"""
+        """Get current speed.
+
+        @return: int
+        """
         pass
 
     def is_running(self):
-        """Returns true if the distance has not yet been reached.
-        @ReturnType bool"""
+        """Return True if motor is running.
+
+        @return: bool
+        """
         pass
 
     def start(self):
-        """Starts the motor."""
+        """Start motor."""
         pass
 
     def stop(self):
-        """Sets the speed to zero and stops the motor."""
+        """Stop motor."""
         pass
 
     def coast(self):
-        """Sets the speed to zero and coasts the motor."""
+        """Coast motor."""
         pass
 
     def validate_speed(self, speed):

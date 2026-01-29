@@ -4,19 +4,31 @@ from .Input import Input
 
 class MiniSwitch(Input):
     def __init__(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.BaseController
-        @ParamType identifier int"""
+        """Mini switch base class.
+
+        @param controller: BaseController
+        @param identifier: int input index
+        """
         Input.__init__(self, controller, identifier)
 
     def get_state(self):
-        """@ReturnType int"""
+        """Get switch state.
+
+        @return: int
+        """
         pass
 
     def is_open(self):
-        """@ReturnType boolean"""
+        """Return True if switch is open.
+
+        @return: bool
+        """
         pass
 
     def is_closed(self):
-        """@ReturnType boolean"""
+        """Return True if switch is closed.
+
+        @return: bool
+        """
         pass
 

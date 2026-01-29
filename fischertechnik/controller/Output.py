@@ -9,8 +9,11 @@ class Output(IOUnit):
 
     """Abstract Output"""
     def __init__(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.BaseController
-        @ParamType identifier int"""
+        """Output base class.
+
+        @param controller: BaseController
+        @param identifier: int output index
+        """
         IOUnit.__init__(self, controller, identifier)
         self._controller.set_output(self._identifier, self)
 
@@ -18,20 +21,25 @@ class Output(IOUnit):
         self.off()
 
     def on(self):
-        """@ParamType brightness int
-        @ReturnType void"""
+        """Turn output on."""
         pass
 
     def off(self):
-        """@ReturnType int"""
+        """Turn output off."""
         pass
 
     def is_on(self):
-        """@ReturnType boolean"""
+        """Return True if output is on.
+
+        @return: bool
+        """
         pass
 
     def is_off(self):
-        """@ReturnType boolean"""
+        """Return True if output is off.
+
+        @return: bool
+        """
         pass
 
     def validate_value(self, value):

@@ -12,43 +12,64 @@ from ..InputFactory import InputFactory
 
 class Txt4InputFactory(InputFactory):
     def create_ntc_resistor(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.NTCResistor"""
+        """Create a Txt4 NTC resistor input.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Txt4NTCResistor
+        """
         return Txt4NTCResistor(controller, identifier)
 
     def create_photo_resistor(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.Resistor"""
+        """Create a Txt4 photo resistor input.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Txt4Resistor
+        """
         return Txt4Resistor(controller, identifier)
 
     def create_ultrasonic_distance_meter(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.UltrasonicDistanceMeter"""
+        """Create a Txt4 ultrasonic distance meter input.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Txt4UltrasonicDistanceMeter
+        """
         return Txt4UltrasonicDistanceMeter(controller, identifier)
 
     def create_photo_transistor(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.PhotoTransistor"""
+        """Create a Txt4 photo transistor input.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Txt4PhotoTransistor
+        """
         return Txt4PhotoTransistor(controller, identifier)
 
     def create_color_sensor(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.ColorSensor"""
+        """Create a Txt4 color sensor input.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Txt4ColorSensor
+        """
         return Txt4ColorSensor(controller, identifier)
 
     def create_trail_follower(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType TrailFollower"""
+        """Create a Txt4 trail follower input.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Txt4TrailFollower
+        """
         return Txt4TrailFollower(controller, identifier)
 
     def create_mini_switch(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.MiniSwitch"""
+        """Create a Txt4 mini switch input.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Txt4MiniSwitch
+        """
         return Txt4MiniSwitch(controller, identifier)

@@ -13,7 +13,7 @@ class Txt4ControllerFactory(ControllerFactory):
     __master = None
 
     def create_graphical_controller(self, ext = 0):
-        """@ReturnType fischertechnik.controller.GraphicalInputOutputController"""
+        """Create and return a Txt4 controller; ext==0 creates master, ext>0 returns matching extension or raises."""
         if ext > 0 and self.__master is None:
             raise Exception('Creating extension without master')
         if ext == 0:
@@ -29,11 +29,11 @@ class Txt4ControllerFactory(ControllerFactory):
         raise Exception('Extension for index %d does not exist' % ext)
 
     def create_graphical_controller_from_info(self, controller, info):
-        """@ReturnType fischertechnik.controller.GraphicalInputOutputController"""
+        """Return a Txt4Controller instance for the given controller and info."""
         return Txt4Controller(controller._txt.getController(info))
 
     def get_controller_info_list(self, controller):
-        """@ReturnType A list of fischertechnik.controller.ControllerInfo"""
+        """Return a list of Txt4ControllerInfo objects for controller and its extensions."""
         txt = controller._txt
         list = []
         for i in range(txt.nslaves + 1):

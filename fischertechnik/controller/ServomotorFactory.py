@@ -6,9 +6,12 @@ class ServomotorFactory(object):
         object.__init__(self)
 
     def create_servomotor(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.Servomotor"""
+        """Create a servo motor.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Servomotor
+        """
         pass
 
 

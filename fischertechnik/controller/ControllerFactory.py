@@ -8,14 +8,27 @@ class ControllerFactory(object):
         object.__init__(self)
 
     def create_graphical_controller(self, ext=0):
-        """@ReturnType fischertechnik.controller.GraphicalInputOutputController"""
+        """Create and return a graphical controller.
+
+        @param ext: int (0=master, >0=extension)
+        @return: GraphicalInputOutputController
+        """
         pass
 
     def create_graphical_controller_from_info(self, controller, info):
-        """@ReturnType fischertechnik.controller.GraphicalInputOutputController"""
+        """Create a graphical controller instance from controller info.
+
+        @param controller: GraphicalInputOutputController
+        @param info: ControllerInfo
+        @return: GraphicalInputOutputController
+        """
         pass
 
     def get_controller_info_list(self, controller):
-        """@return: A list of ControllerInfo"""
+        """Return a list of available controller infos.
+
+        @param controller: GraphicalInputOutputController
+        @return: list[ControllerInfo]
+        """
         pass
 

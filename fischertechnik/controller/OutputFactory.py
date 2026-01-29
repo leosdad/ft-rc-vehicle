@@ -6,31 +6,46 @@ class OutputFactory(object):
         object.__init__(self)
 
     def create_lamp(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.LightSource"""
+        """Create a lamp/light output.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: LightSource
+        """
         pass
 
     def create_led(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.LightSource"""
+        """Create an LED output.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: LightSource
+        """
         pass
 
     def create_magnetic_valve(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.MagneticValve"""
+        """Create a magnetic valve output.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: MagneticValve
+        """
         pass
 
     def create_compressor(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.Compressor"""
+        """Create a compressor output.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Compressor
+        """
         pass
 
     def create_unidirectional_motor(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.UnidirectionalMotor"""
+        """Create a unidirectional motor output.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: UnidirectionalMotor
+        """
         pass

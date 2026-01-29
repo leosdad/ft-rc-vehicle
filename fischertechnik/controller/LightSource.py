@@ -4,15 +4,23 @@ from .Output import Output
 
 class LightSource(Output):
     def __init__(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.BaseController
-        @ParamType identifier int"""
+        """Light source base class.
+
+        @param controller: BaseController
+        @param identifier: int output index
+        """
         Output.__init__(self, controller, identifier)
 
     def set_brightness(self, brightness):
-        """@ParamType brightness int
-        @ReturnType void"""
+        """Set brightness.
+
+        @param brightness: int (0-512)
+        """
         pass
 
     def get_brightness(self):
-        """@ReturnType int"""
+        """Get brightness.
+
+        @return: int
+        """
         pass

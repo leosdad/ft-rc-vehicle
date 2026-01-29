@@ -6,15 +6,21 @@ class MotorFactory(object):
         object.__init__(self)
 
     def create_motor(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.Motor"""
+        """Create a motor.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Motor
+        """
         pass
 
     def create_encodermotor(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.Encodermotor"""
+        """Create an encoder motor.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Encodermotor
+        """
         pass
 
 

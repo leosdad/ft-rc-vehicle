@@ -8,40 +8,47 @@ class Txt4Motor(Motor):
     instance = None
 
     def __init__(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.BaseController
-        @ParamType identifier int"""
+        """Initialize Txt4Motor with controller and identifier.
+
+        @param controller: BaseController-like object.
+        @param identifier: motor index.
+        """
         self.instance = controller._txt.motor(identifier)
         controller._txt.update_config()
         Motor.__init__(self, controller, identifier)
 
-    def set_speed(self, speed, direction = Motor.CCW):
-        """Sets the Speed at which the engine should run.
-        @ParamType speed int
-        The speed range is between 0 (stop the motor) and 512
-        (maximum speed)
-        @ReturnType void"""
+    def set_speed(self, speed, direction=Motor.CCW):
+        """Set motor speed (0-512) with direction after validation.
+
+        @param speed: int (0-512)
+        @param direction: int (Motor.CW or Motor.CCW)
+        """
         self.validate_speed(speed)
         speed = speed * direction
         self.instance.speed_set(speed)
 
     def get_speed(self):
-        """Speed at which the engine is running. The speed range is between 0 (stop the motor) and 512 (maximum speed)
-        @ReturnType int"""
+        """Return current PWM speed (0-512).
+
+        @return: int
+        """
         return self.instance.pwm
 
     def is_running(self):
-        """Returns true if the distance has not yet been reached.
-        @ReturnType bool"""
+        """Return True if motor is running (pwm != 0).
+
+        @return: bool
+        """
         return self.instance.pwm != 0
 
     def start(self):
-        """Starts the motor."""
+        """Start motor at current speed."""
         self.instance.start_speed(self.get_speed())
 
     def stop(self):
-        """Sets the speed to zero and stops the motor."""
+        """Stop motor immediately."""
         self.instance.stop()
 
     def coast(self):
-        """Sets the speed to zero and coasts the motor."""
+        """Coast motor (allow free spin)."""
         self.instance.coast()

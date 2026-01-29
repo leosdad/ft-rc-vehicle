@@ -7,7 +7,10 @@ from ..ServomotorFactory import ServomotorFactory
 class Txt4ServomotorFactory(ServomotorFactory):
 
     def create_servomotor(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.Servomotor"""
+        """Create a Txt4 servo motor.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Txt4Servomotor
+        """
         return Txt4Servomotor(controller, identifier)

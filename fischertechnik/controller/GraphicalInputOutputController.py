@@ -22,34 +22,56 @@ class GraphicalInputOutputController(InputOutputController):
         InputOutputController.__init__(self)
 
     def set_window(self, window):
-        """@ParamType window fischertechnik.controller.Window"""
+        """Attach a window (GUI) to the controller.
+
+        @param window: Window
+        """
         pass
 
     def exec_controller(self):
         pass
 
     def set_usb(self, idx, usb):
-        """@ParamType idx int
-        @ParamType usb fischertechnik.controller.USB"""
+        """Set USB device at index.
+
+        @param idx: int (1-based)
+        @param usb: USB
+        """
         self._usb[idx - 1] = usb
 
     def get_usb(self, idx):
-        """@ParamType idx int"""
+        """Get USB device at index.
+
+        @param idx: int (1-based)
+        @return: USB
+        """
         return self._usb[idx - 1]
 
     def set_loudspeaker(self, loudspeaker):
-        """@ReturnType fischertechnik.controller.Loudspeaker"""
+        """Set loudspeaker.
+
+        @param loudspeaker: Loudspeaker
+        """
         self._loudspeaker = loudspeaker
 
     def get_loudspeaker(self):
-        """@ReturnType fischertechnik.controller.Loudspeaker"""
+        """Get loudspeaker.
+
+        @return: Loudspeaker
+        """
         return  self._loudspeaker
 
     def get_microphone(self):
-        """@ReturnType fischertechnik.controller.Microphone"""
+        """Get microphone.
+
+        @return: Microphone
+        """
         pass
 
     def get_ir(self):
-        """@ReturnType fischertechnik.controller.IR"""
+        """Get IR interface.
+
+        @return: IR
+        """
         pass
 

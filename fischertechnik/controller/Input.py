@@ -4,8 +4,11 @@ from .IOUnit import IOUnit
 
 class Input(IOUnit):
     def __init__(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.BaseController
-        @ParamType identifier int"""
+        """Input base class.
+
+        @param controller: BaseController
+        @param identifier: int input index
+        """
         IOUnit.__init__(self, controller, identifier)
         self._controller.set_input(self._identifier, self)
 

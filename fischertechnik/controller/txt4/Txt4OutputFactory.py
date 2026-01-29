@@ -10,31 +10,46 @@ from ..OutputFactory import OutputFactory
 class Txt4OutputFactory(OutputFactory):
 
     def create_lamp(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.LightSource"""
+        """Create a Txt4 lamp/light output.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Txt4LightSource
+        """
         return Txt4LightSource(controller, identifier)
 
     def create_led(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.LightSource"""
+        """Create a Txt4 LED output.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Txt4LightSource
+        """
         return Txt4LightSource(controller, identifier)
 
     def create_magnetic_valve(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.MagneticValve"""
+        """Create a Txt4 magnetic valve output.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Txt4MagneticValve
+        """
         return Txt4MagneticValve(controller, identifier)
 
     def create_compressor(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.Motor"""
+        """Create a Txt4 compressor output.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Txt4Compressor
+        """
         return Txt4Compressor(controller, identifier)
 
     def create_unidirectional_motor(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.GraphicalInputOutputController
-        @ParamType identifier int
-        @ReturnType fischertechnik.controller.UnidirectionalMotor"""
+        """Create a Txt4 unidirectional motor output.
+
+        @param controller: GraphicalInputOutputController
+        @param identifier: int
+        @return: Txt4UnidirectionalMotor
+        """
         return Txt4UnidirectionalMotor(controller, identifier)

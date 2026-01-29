@@ -7,31 +7,48 @@ class Txt4LightSource(LightSource):
     instance = None
 
     def __init__(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.BaseController
-        @ParamType identifier int"""
+        """Txt4 light source.
+
+        @param controller: BaseController
+        @param identifier: int output index
+        """
         self.instance = controller._txt.output(identifier)
         controller._txt.update_config()
         LightSource.__init__(self, controller, identifier)
 
     def on(self):
+        """Turn on (full brightness)."""
         self.instance.setLevel(512)
 
     def off(self):
+        """Turn off."""
         self.instance.setLevel(0)
 
     def is_on(self):
-        """@ReturnType boolean"""
+        """Return True if on.
+
+        @return: bool
+        """
         return self.instance.pwm != 0
 
     def is_off(self):
-        """@ReturnType boolean"""
+        """Return True if off.
+
+        @return: bool
+        """
         return self.instance.pwm == 0
 
     def set_brightness(self, brightness):
-        """@ParamType brightness int"""
+        """Set brightness.
+
+        @param brightness: int (0-512)
+        """
         self.validate_value(brightness)
         self.instance.setLevel(brightness)
 
     def get_brightness(self):
-        """@ReturnType int"""
+        """Get brightness.
+
+        @return: int
+        """
         return self.instance.pwm

@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-from .Txt4Controller import Txt4Controller
 from ..MiniSwitch import MiniSwitch
 
 
@@ -9,20 +8,32 @@ class Txt4MiniSwitch(MiniSwitch):
     instance = None
 
     def __init__(self, controller, identifier):
-        """@ParamType controller fischertechnik.controller.BaseController
-        @ParamType identifier int"""
+        """Txt4 mini switch.
+
+        @param controller: BaseController
+        @param identifier: int input index
+        """
         self.instance = controller._txt.switch(identifier)
         controller._txt.update_config()
         MiniSwitch.__init__(self, controller, identifier)
 
     def get_state(self):
-        """@ReturnType int"""
+        """Get switch state.
+
+        @return: int
+        """
         return self.instance.state()
 
     def is_open(self):
-        """@ReturnType boolean"""
+        """Return True if switch is open.
+
+        @return: bool
+        """
         return self.get_state() == 0
 
     def is_closed(self):
-        """@ReturnType boolean"""
+        """Return True if switch is closed.
+
+        @return: bool
+        """
         return self.get_state() == 1
