@@ -1,0 +1,5 @@
+{
+  "pylint.args": ["--ignore-paths=(^|.*[\\/])fischertechnik([\\/].*)?"],
+  "python.analysis.exclude": ["fischertechnik/**"],
+  "files.watcherExclude": {"**/fischertechnik/**": true}
+}

@@ -14,13 +14,18 @@ txt_factory.init_servomotor_factory()
 # Create the graphical controller
 TXT_M = txt_factory.controller_factory.create_graphical_controller()
 
-# Create inputs and outputs
-rumble_switch = txt_factory.input_factory.create_mini_switch(TXT_M, 1)
-headlights_led = txt_factory.output_factory.create_led(TXT_M, 7)
-reverse_led = txt_factory.output_factory.create_led(TXT_M, 8)
+# Create inputs
+center_switch = txt_factory.input_factory.create_mini_switch(TXT_M, 1)
+rumble_switch = txt_factory.input_factory.create_mini_switch(TXT_M, 2)
+
+# Create outputs
+drive_motor = txt_factory.motor_factory.create_motor(TXT_M, 1)
+steer_motor = txt_factory.motor_factory.create_motor(TXT_M, 2)
 taillights_led = txt_factory.output_factory.create_led(TXT_M, 5)
 horn_buzzer = txt_factory.output_factory.create_magnetic_valve(TXT_M, 6)
-drive_motor = txt_factory.motor_factory.create_motor(TXT_M, 1)
+headlights_led = txt_factory.output_factory.create_led(TXT_M, 7)
+reverse_led = txt_factory.output_factory.create_led(TXT_M, 8)
+
 steer_servo = txt_factory.servomotor_factory.create_servomotor(TXT_M, 1)
 
 # Finalize initialization

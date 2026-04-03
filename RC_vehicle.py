@@ -19,16 +19,69 @@ Analog = None
 prev_buttonRB = None
 Buttons = None
 Axes = None
+steering = None
+Steer_position = None
+Steer_full_lock_ms = None
+Steer_last_time = None
+Steer_motor_speed = None
+Steer_motor_min_speed = None
+Steer_deadband = None
+Steer_positive_direction = None
+Steer_negative_direction = None
+Steer_center_search_time = None
+Steer_centered = None
 
 
 def Init():
   """Initialize variables."""
   global Speed, Lights_on, prev_buttonLB, Reverse_on, prev_buttonRB
+  global steering, Steer_position, Steer_full_lock_ms, Steer_last_time
+  global Steer_motor_speed, Steer_motor_min_speed, Steer_deadband, Steer_positive_direction
+  global Steer_negative_direction, Steer_center_search_time, Steer_centered
   Speed = 0
   Reverse_on = False
   prev_buttonRB = False
   prev_buttonLB = False
   Lights_on = False
+  steering = "motor"
+  Steer_position = 0
+  Steer_full_lock_ms = 500  # ms from center to full lock at Steer_motor_min_speed; measure and tune
+  Steer_last_time = time.monotonic()
+  Steer_motor_speed = Motor.MAX_SPEED
+  Steer_motor_min_speed = 300
+  Steer_deadband = 4
+  Steer_positive_direction = Motor.CCW
+  Steer_negative_direction = Motor.CW
+  Steer_center_search_time = 1.5
+  Steer_centered = True
+  ResetSteering()
+
+
+def Center_steer_motor():
+  """Home the steering motor using the center switch."""
+  global Steer_position, Steer_centered
+  if center_switch.is_closed():
+    steer_motor.stop()
+    Steer_position = 0
+    Steer_centered = True
+    return
+
+  Steer_centered = False
+  steer_motor.set_speed(Steer_motor_min_speed, Steer_positive_direction)
+  steer_motor.start()
+  start_time = time.monotonic()
+  while not center_switch.is_closed() and time.monotonic() - start_time < Steer_center_search_time:
+    time.sleep(0.005)
+
+  if not center_switch.is_closed():
+    steer_motor.set_speed(Steer_motor_min_speed, Steer_negative_direction)
+    steer_motor.start()
+    while not center_switch.is_closed():
+      time.sleep(0.005)
+
+  steer_motor.stop()
+  Steer_position = 0
+  Steer_centered = True
 
 
 def Toggle_headlights():
@@ -49,12 +102,70 @@ def Throttle():
 
 def Steer():
   """Set the steering based on the RC input."""
-  steer_servo.set_position(int(Axes['X'] * 0.5))
+  global Steer_position, Steer_centered, Steer_last_time
+  if steering == "servo":
+    steer_servo.set_position(int(Axes['X'] * 0.5))
+    return
+
+  now = time.monotonic()
+  dt_ms = (now - Steer_last_time) * 1000
+  Steer_last_time = now
+
+  if center_switch.is_closed():
+    Steer_position = 0
+    Steer_centered = True
+
+  if not Steer_centered:
+    return
+
+  joystick = Axes['X'] - 256  # -256..+256
+  target = joystick * Steer_full_lock_ms / 256  # ±Steer_full_lock_ms
+
+  if abs(joystick) <= Steer_deadband:
+    if center_switch.is_closed():
+      steer_motor.stop()
+      Steer_position = 0
+    elif Steer_position > 0:
+      steer_motor.set_speed(Steer_motor_min_speed, Steer_negative_direction)
+      steer_motor.start()
+      Steer_position = max(1, Steer_position - dt_ms)
+    elif Steer_position < 0:
+      steer_motor.set_speed(Steer_motor_min_speed, Steer_positive_direction)
+      steer_motor.start()
+      Steer_position = min(-1, Steer_position + dt_ms)
+    return
+
+  error = target - Steer_position
+  if abs(error) < dt_ms:
+    steer_motor.stop()
+    return
+
+  speed = min(
+    Steer_motor_speed,
+    max(
+      Steer_motor_min_speed,
+      int(Steer_motor_min_speed + abs(joystick) * (Steer_motor_speed - Steer_motor_min_speed) / 256)
+    )
+  )
+  advance = dt_ms * speed / Steer_motor_min_speed
+
+  if error > 0:
+    steer_motor.set_speed(speed, Steer_positive_direction)
+    steer_motor.start()
+    Steer_position = min(target, Steer_position + advance)
+  else:
+    steer_motor.set_speed(speed, Steer_negative_direction)
+    steer_motor.start()
+    Steer_position = max(target, Steer_position - advance)
 
 
 def ResetSteering():
   """Center the steering servo."""
-  steer_servo.set_position(256)
+  if steering == "motor":
+    Center_steer_motor()
+  else:
+    steer_motor.stop()
+    steer_servo.set_position(256)
 
 
 def Toggle_reverse():
