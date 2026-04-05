@@ -126,13 +126,13 @@ def Steer():
       steer_motor.stop()
       Steer_position = 0
     elif Steer_position > 0:
-      steer_motor.set_speed(Steer_motor_min_speed, Steer_negative_direction)
+      steer_motor.set_speed(Steer_motor_speed, Steer_negative_direction)
       steer_motor.start()
-      Steer_position = max(1, Steer_position - dt_ms)
+      Steer_position = max(1, Steer_position - dt_ms * Steer_motor_speed / Steer_motor_min_speed)
     elif Steer_position < 0:
-      steer_motor.set_speed(Steer_motor_min_speed, Steer_positive_direction)
+      steer_motor.set_speed(Steer_motor_speed, Steer_positive_direction)
       steer_motor.start()
-      Steer_position = min(-1, Steer_position + dt_ms)
+      Steer_position = min(-1, Steer_position + dt_ms * Steer_motor_speed / Steer_motor_min_speed)
     return
 
   error = target - Steer_position
